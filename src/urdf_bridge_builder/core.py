@@ -8,10 +8,11 @@ logger = logging.getLogger(__name__)
 
 class BridgeConfig:
     """Represents a single bridge configuration."""
-    def __init__(self, ros_topic: str, gz_topic: str, msg_type: str, direction: str):
+    def __init__(self, ros_topic: str, gz_topic: str, ros_type: str, gz_type: str, direction: str):
         self.ros_topic = ros_topic
         self.gz_topic = gz_topic
-        self.msg_type = msg_type
+        self.ros_type = ros_type
+        self.gz_type = gz_type
         self.direction = direction
 
     def to_dict(self) -> Dict[str, str]:
@@ -19,8 +20,8 @@ class BridgeConfig:
         return {
             "ros_topic": self.ros_topic,
             "gz_topic": self.gz_topic,
-            "ros_type": self.msg_type,
-            "gz_type": self.msg_type, # Assuming ROS and GZ types are the same for now
+            "ros_type": self.ros_type,
+            "gz_type": self.gz_type,
             "direction": self.direction,
         }
 
@@ -67,7 +68,8 @@ def parse_bridge_tag(bridge_element: ET.Element) -> BridgeConfig:
     The <bridge> tag is expected to have attributes:
     - `ros_topic`: The ROS topic name.
     - `gz_topic`: The Gazebo topic name.
-    - `type`: The message type (e.g., 'std_msgs/msg/String').
+    - `ros_type`: The ROS message type (e.g., 'std_msgs/msg/String').
+    - `gz_type`: The Gazebo message type (e.g., 'std_msgs/msg/String').
     - `direction`: The bridge direction ('ros_to_gz', 'gz_to_ros', 'bidirectional').
 
     Args:
@@ -79,7 +81,7 @@ def parse_bridge_tag(bridge_element: ET.Element) -> BridgeConfig:
     Raises:
         ValueError: If any required attribute is missing from the <bridge> tag.
     """
-    required_attrs = ["ros_topic", "gz_topic", "type", "direction"]
+    required_attrs = ["ros_topic", "gz_topic", "ros_type", "gz_type", "direction"]
     for attr in required_attrs:
         if attr not in bridge_element.attrib:
             raise ValueError(f"Missing required attribute '{attr}' in bridge tag: {ET.tostring(bridge_element, encoding='unicode')}")
@@ -87,7 +89,8 @@ def parse_bridge_tag(bridge_element: ET.Element) -> BridgeConfig:
     return BridgeConfig(
         ros_topic=bridge_element.attrib["ros_topic"],
         gz_topic=bridge_element.attrib["gz_topic"],
-        msg_type=bridge_element.attrib["type"],
+        ros_type=bridge_element.attrib["ros_type"],
+        gz_type=bridge_element.attrib["gz_type"],
         direction=bridge_element.attrib["direction"],
     )
 
