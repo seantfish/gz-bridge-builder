@@ -14,12 +14,12 @@ It does so by parsing a generated URDF (XML) file and looking for <bridge> tags.
 ### Bridge Generation
 - Automatically collects bridges from all components
 - Outputs:
-  - `bridge.yaml` for `ros_gz_bridge`
-  - optional command interface `gz-bridge-builder path/to/urdf`
+  - `bridge.yaml` for `ros_urdf_bridge`
+  - optional command interface `urdf-bridge-builder path/to/urdf`
 
 ### Python Package Layout
 
-gz-bridge-builder/src/
+urdf-bridge-builder/src/
   __init__.py
   app.py # CLI interface impleented with typer (slim)
   core.py # parsing, aggregation, and generation

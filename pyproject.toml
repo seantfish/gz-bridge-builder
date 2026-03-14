@@ -1,5 +1,5 @@
 [project]
-name = "robot-bridge-manager"
+name = "urdf-bridge-builder"
 version = "0.1.0"
 description = "A Python package to generate ROS Gazebo bridge YAML from URDF files."
 authors = [
@@ -12,26 +12,17 @@ dependencies = [
     "typer[all]>=0.9.0",
     "lxml>=4.9.0",
     "pyyaml>=6.0",
+    "typing_extensions"
 ]
 
 [project.scripts]
-gz-bridge-builder = "gz_bridge_builder.app:main"
+urdf-bridge-builder = "urdf_bridge_builder.app:main"
 
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["gz-bridge-builder/src"]
-
-[tool.pytest.ini_options]
-pythonpath = ["gz-bridge-builder/src"]
-
-[tool.setuptools.package-data]
-"gz_bridge_builder" = ["py.typed"]
-
-[tool.mypy]
-ignore_missing_imports = true # Ignore missing imports for now, refine later
-plugins = [
-    "pydantic.mypy"
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/urdf_bridge_builder"
 ]

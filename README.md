@@ -35,10 +35,10 @@ Attributes:
 
 ### Generating the Bridge YAML
 
-Once your URDF file contains the necessary `<bridge>` tags, you can use the `gz-bridge-builder` command-line tool to generate the `bridge.yaml` file.
+Once your URDF file contains the necessary `<bridge>` tags, you can use the `urdf-bridge-builder` command-line tool to generate the `bridge.yaml` file.
 
 ```bash
-gz-bridge-builder generate path/to/your_robot.urdf --output bridge.yaml
+urdf-bridge-builder generate path/to/your_robot.urdf --output bridge.yaml
 ```
 
 - `path/to/your_robot.urdf`: The path to your URDF file.
@@ -54,7 +54,7 @@ If `my_robot.urdf` contains:
 </robot>
 ```
 
-Running `gz-bridge-builder generate my_robot.urdf` will create `bridge.yaml`:
+Running `urdf-bridge-builder generate my_robot.urdf` will create `bridge.yaml`:
 ```yaml
 - ros_topic: /joint_states
   gz_topic: /model/my_robot/joint_states
@@ -68,7 +68,7 @@ Running `gz-bridge-builder generate my_robot.urdf` will create `bridge.yaml`:
   direction: ros_to_gz
 ```
 
-This `bridge.yaml` file can then be used with `ros_gz_bridge`.
+This `bridge.yaml` file can then be used with `ros_urdf_bridge`.
 
 ## Development
 
@@ -78,5 +78,5 @@ To run the unit tests, ensure you have `pytest` installed and run it from the pr
 
 ```bash
 pip install pytest
-pytest gz-bridge-builder/src/tests/
+pytest urdf-bridge-builder/src/tests/
 ```

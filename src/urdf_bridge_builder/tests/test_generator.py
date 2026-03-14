@@ -3,7 +3,7 @@ import pytest
 import xml.etree.ElementTree as ET
 import yaml
 
-from gz_bridge_builder import core
+from urdf_bridge_builder import core
 
 # Define a temporary URDF content for testing
 TEST_URDF_CONTENT = """
@@ -107,7 +107,7 @@ def test_app_generate_success(tmp_path: Path):
     from typer.testing import CliRunner
     runner = CliRunner()
     
-    from gz_bridge_builder.app import app as cli_app
+    from urdf_bridge_builder.app import app as cli_app
     result = runner.invoke(cli_app, ["generate", str(urdf_file), "--output", str(output_yaml)])
 
     assert result.exit_code == 0
@@ -129,7 +129,7 @@ def test_app_generate_no_bridge_tags(tmp_path: Path):
 
     from typer.testing import CliRunner
     runner = CliRunner()
-    from gz_bridge_builder.app import app as cli_app
+    from urdf_bridge_builder.app import app as cli_app
     result = runner.invoke(cli_app, ["generate", str(urdf_file), "--output", str(output_yaml)])
 
     assert result.exit_code == 0 # Should exit cleanly if no bridges found
@@ -143,7 +143,7 @@ def test_app_generate_invalid_urdf(tmp_path: Path):
 
     from typer.testing import CliRunner
     runner = CliRunner()
-    from gz_bridge_builder.app import app as cli_app
+    from urdf_bridge_builder.app import app as cli_app
     result = runner.invoke(cli_app, ["generate", str(urdf_file), "--output", str(output_yaml)])
 
     assert result.exit_code == 1
@@ -157,7 +157,7 @@ def test_app_generate_urdf_not_found(tmp_path: Path):
 
     from typer.testing import CliRunner
     runner = CliRunner()
-    from gz_bridge_builder.app import app as cli_app
+    from urdf_bridge_builder.app import app as cli_app
     result = runner.invoke(cli_app, ["generate", str(non_existent_urdf), "--output", str(output_yaml)])
 
     assert result.exit_code == 1

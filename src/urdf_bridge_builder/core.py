@@ -93,7 +93,7 @@ def parse_bridge_tag(bridge_element: ET.Element) -> BridgeConfig:
 
 def generate_bridge_yaml(bridges: List[BridgeConfig]) -> str:
     """
-    Generates the YAML content for ros_gz_bridge from a list of BridgeConfig objects.
+    Generates the YAML content for ros_urdf_bridge from a list of BridgeConfig objects.
 
     Args:
         bridges: A list of BridgeConfig objects.

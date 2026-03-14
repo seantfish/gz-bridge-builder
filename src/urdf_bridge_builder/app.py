@@ -2,11 +2,11 @@ from pathlib import Path
 import typer
 from typing_extensions import Annotated
 
-from gz_bridge_builder import core
+from urdf_bridge_builder import core
 
 app = typer.Typer(
-    name="gz-bridge-builder",
-    help="A utility to generate ros_gz_bridge YAML files from URDF.",
+    name="urdf-bridge-builder",
+    help="A utility to generate ros_urdf_bridge YAML files from URDF.",
     pretty_exceptions_enable=False,
 )
 
@@ -33,7 +33,7 @@ def generate(
     ] = Path("bridge.yaml"),
 ):
     """
-    Generates a ros_gz_bridge YAML file by parsing <bridge> tags in a URDF file.
+    Generates a ros_urdf_bridge YAML file by parsing <bridge> tags in a URDF file.
     """
     try:
         typer.echo(f"Parsing URDF file: {urdf_path}")
