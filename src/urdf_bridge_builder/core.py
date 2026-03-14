@@ -139,6 +139,8 @@ def generate_launch_params(
         if not bridge_name:
             bridge_name = f"{bridge_name}_{base_name_suffix}" if base_name_suffix else bridge_name
 
+        bridge_names.append(bridge_name)
+        
         params_list.extend([
             {f"bridges.{bridge_name}.ros_topic_name": bridge.ros_topic},
             {f"bridges.{bridge_name}.gz_topic_name": bridge.gz_topic},
