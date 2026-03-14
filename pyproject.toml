@@ -1,15 +1,15 @@
 [project]
 name = "urdf-bridge-builder"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A Python package to generate ROS Gazebo bridge YAML from URDF files."
 authors = [
-  { name = "Your Name", email = "your.email@example.com" },
+  { name = "Sean Fish", email = "seanfish@gatech.edu" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "typer[all]>=0.9.0",
+    "typer>=0.9.0",
     "lxml>=4.9.0",
     "pyyaml>=6.0",
     "typing_extensions"
@@ -26,3 +26,9 @@ build-backend = "hatchling.build"
 packages = [
   "src/urdf_bridge_builder"
 ]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/urdf_bridge_builder/_version.py"
